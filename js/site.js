@@ -1,4 +1,50 @@
-// Call Hello World
-function HelloWorld(){
-    alert("Hello World");
+//get the value from the Page
+function getValues() {
+  // get values from the page
+  let startValue = document.getElementById("startValue").value;
+  let endValue = document.getElementById("endValue").value;
+
+  startValue = parseInt(startValue);
+  endValue = parseInt(endValue);
+
+  if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+    // call generateNumbers
+    let numbers = generateNumbers(startValue, endValue);
+    // call displayNumbers
+    displayNumbers(numbers);
+  } else {
+    alert("You must enter an integer");
+  }
+}
+
+//generate numbers from startvalue to the endvalue
+function generateNumbers(startValue, endValue) {
+  let numbers = [];
+
+  // get all numbers from start to endValue
+  for (let i = startValue; i <= endValue; i++) {
+    // execute until i = endValue
+    numbers.push(i);
+  }
+
+  return numbers;
+}
+
+// display the numbers and mark even numbers bold
+function displayNumbers(numbers) {
+  let templateRows = "";
+
+  for (let i = 0; i < numbers.length; i++) {
+    let className = "even";
+    let number = numbers[i];
+
+    if(number % 2 == 0){
+      className = "even";
+    }else{
+      className = "odd";
+    }
+    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+  }
+
+  document.getElementById("results").innerHTML = templateRows;
 }
